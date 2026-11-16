@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#101824" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23e4b46c' d='M32 6 59 56H5z'/%3E%3C/svg%3E" />
+  <title>ALTITUDE — A última parede</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main id="game-shell">
+    <canvas id="scene" aria-label="Jogo 3D de escalada"></canvas>
+    <div class="grain"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Altitude"><span class="brand-mark">▲</span><span>ALTITUDE<span class="brand-period">.</span></span></a>
+      <div class="top-right"><span class="weather"><i></i> VENTO FORTE</span><button class="icon-btn" id="sound-toggle" aria-label="Ativar ou desativar som">♫</button><button class="icon-btn" id="pause-btn" aria-label="Pausar jogo">Ⅱ</button></div>
+    </header>
+    <section class="game-hud" id="game-hud" aria-live="polite">
+      <div class="objective"><span class="eyebrow">EXPEDIÇÃO 01 <b>·</b> SERRA DO FIM</span><div class="objective-line"><span class="objective-dot"></span><span id="objective-text">Alcance o próximo platô</span></div></div>
+      <div class="meters">
+        <div class="meter-block"><div class="meter-label"><span>ALTITUDE</span><span id="altitude-value">1.240 m</span></div><div class="meter-track"><div class="meter-fill altitude-fill" id="altitude-meter"></div></div></div>
+        <div class="meter-block"><div class="meter-label"><span>RESISTÊNCIA</span><span id="stamina-value">100%</span></div><div class="meter-track"><div class="meter-fill stamina-fill" id="stamina-meter"></div></div></div>
+      </div>
+      <div class="route-card"><span class="route-icon">⌁</span><div><span class="eyebrow">ROTA ATUAL</span><strong id="route-name">Aresta do Corvo</strong></div><span class="route-grade">4B</span></div>
+    </section>
+    <div class="climb-tip" id="climb-tip"><span class="tip-key">W A S D</span><span>MOVA-SE PELA PAREDE</span><span class="tip-divider"></span><span class="tip-key">ESPAÇO</span><span>AGARRE</span></div>
+    <div class="event-toast" id="event-toast"></div>
+    <div class="center-marker" id="center-marker"><span></span></div>
+    <section class="overlay show" id="start-screen">
+      <div class="overlay-content intro-content">
+        <div class="edition"><span class="edition-line"></span> DIÁRIO DE UMA ASCENSÃO <span class="edition-line"></span></div>
+        <h1>O mundo<br>fica <em>pequeno.</em></h1>
+        <p class="intro-copy">Uma parede. Um último respiro.<br>Encontre seu caminho até o topo.</p>
+        <button class="primary-btn" id="start-btn"><span>COMEÇAR A ESCALADA</span><span class="button-arrow">↗</span></button>
+        <div class="intro-foot"><span>SOLO · MODO EXPEDIÇÃO</span><span>ALTITUDE 01 / 03</span></div>
+      </div>
+      <div class="intro-side-note"><span>46° 51' 08.4" N</span><span>ALPES · 06:12 AM</span></div>
+    </section>
+    <section class="overlay hidden" id="pause-screen">
+      <div class="overlay-content modal-content"><div class="edition"><span class="edition-line"></span> RESPIRA FUNDO <span class="edition-line"></span></div><h2>Em pausa<span class="brand-period">.</span></h2><p class="intro-copy">A montanha continua esperando.</p><button class="primary-btn" id="resume-btn"><span>CONTINUAR ESCALANDO</span><span class="button-arrow">↗</span></button><button class="text-btn" id="restart-btn">RECOMEÇAR EXPEDIÇÃO</button></div>
+    </section>
+    <section class="overlay hidden" id="end-screen">
+      <div class="overlay-content modal-content"><div class="edition"><span class="edition-line"></span> CUME CONQUISTADO <span class="edition-line"></span></div><h2>Você chegou<span class="brand-period">.</span></h2><p class="intro-copy">Lá em cima, o silêncio tem outro tamanho.</p><div class="summit-stats"><span><b id="final-height">2.860 m</b><small>ALTITUDE FINAL</small></span><span><b id="final-time">00:00</b><small>TEMPO DE SUBIDA</small></span></div><button class="primary-btn" id="again-btn"><span>ESCALAR DE NOVO</span><span class="button-arrow">↗</span></button></div>
+    </section>
+    <div class="touch-controls" id="touch-controls"><button data-key="w">↑</button><div><button data-key="a">←</button><button data-key="s">↓</button><button data-key="d">→</button></div><button class="touch-grab" data-key=" ">AGARRE</button></div>
+    <footer class="bottom-bar"><span>ALTITUDE <b>01</b> — A ÚLTIMA PAREDE</span><span class="controls-hint">WASD <i>mover</i> <b>·</b> ESPAÇO <i>agarrar</i> <b>·</b> SHIFT <i>descansar</i></span><span class="wind-status"><i>◌</i> 18 KM/H</span></footer>
+  </main>
+  <script type="module" src="./game.js"></script>
+</body>
+</html>
